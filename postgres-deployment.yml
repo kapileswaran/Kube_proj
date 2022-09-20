@@ -1,0 +1,30 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+  labels:
+    name: preserve- database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: postgres-db
+  template:
+    metadata:
+      name: postgres-pod
+      labels:
+        name: postgres-db
+    spec:
+      containers:
+        - name: postgres-container
+          image: postgres
+          env:
+            - name: POSTGRES_PASSWORD
+              value: intelliquit
+            - name: POSTGRES_USER
+              value: myuser
+            - name: POSTGRES_DB
+              value: my_db
+...
+
